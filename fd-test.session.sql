@@ -38,7 +38,14 @@ ADD CONSTRAINT "too_hight_user" CHECK (height < 4.0);
 
 
 ALTER TABLE users
-ADD CONSTRAINT "check_birthday" CHECK (birthday > '1990-01-01')
+ADD CONSTRAINT "check_birthday" CHECK (birthday > '1990-01-01');
+
+
+ALTER TABLE users
+DROP CONSTRAINT "users_email_key";
+
+ALTER TABLE users
+DROP CONSTRAINT "name_pair";
 
 
 CREATE TABLE products (
@@ -186,3 +193,7 @@ WHERE birthday < '1990-03-01';
 
 SELECT * FROM users
 WHERE birthday > '1990-03-01';
+
+
+ALTER TABLE users
+ADD COLUMN is_subscribe boolean;
