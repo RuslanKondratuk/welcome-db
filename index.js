@@ -2,11 +2,9 @@
 const {mapUsers} = require('./mapUsers');
 const configs = require('./configs/db');
 const {getUsers} = require('./api/index');
-const {User} = require('./models/index')
+const {client, User, Phone, Order} = require('./models/index');
+const {generatePhones} = require ('./utils/generate');
 
-
-
-const client = new Client(configs);
 
 
 async function start() {
@@ -14,7 +12,12 @@ async function start() {
 
     const usersArray = await getUsers();
 
-    const {rows} = await User.bulkCreate(usersArray);
+    // const {rows} = await User.bulkCreate(usersArray);
+
+    const {rows: users} = await User.findAll();
+    const phones = await Phone.bulkCreate(generatePhones(100));
+
+    const orders = await Order.bulkCreate(users, phones)
 
     await client.end();
 

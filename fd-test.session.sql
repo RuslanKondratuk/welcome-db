@@ -197,3 +197,18 @@ WHERE birthday > '1990-03-01';
 
 ALTER TABLE users
 ADD COLUMN is_subscribe boolean;
+
+
+ALTER TABLE products
+ADD COLUMN model varchar(200);
+
+ALTER TABLE products
+RENAME COLUMN name to brand;
+
+
+
+DELETE FROM orders_to_products;
+
+
+DELETE FROM products;
+
